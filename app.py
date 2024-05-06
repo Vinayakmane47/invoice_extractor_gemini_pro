@@ -17,7 +17,7 @@ def get_gemini_response(input,image,prompt):
     response = model.generate_content([input,image[0],prompt])
     return response.text 
 
-def input_image_setup(uploaded_file): 
+def input_image_details(uploaded_file): 
     if uploaded_file is not None : 
         bytes_data = uploaded_file.getvalue()
 
@@ -51,6 +51,9 @@ and you will have to answer any questions based on the uploaded invoice image.
 
 # if submit is clicked 
 if submit: 
-    image_data = ''
+    image_data = input_image_details(uploaded_file)
+    response = get_gemini_response(input_prompt,image_data,input)
+    st.subheader("The Response is ")
+    st.write(response)
 
 
